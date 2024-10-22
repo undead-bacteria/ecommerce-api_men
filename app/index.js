@@ -1,22 +1,36 @@
-import express from "express"
-import cookieParser from "cookie-parser"
-import cors from "cors"
-import asyncHandler from "express-async-handler"
-import createError from "http-errors"
-import morgan from "morgan"
+import express from "express";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import asyncHandler from "express-async-handler";
+import createError from "http-errors";
+import morgan from "morgan";
 
+// import routes
+import path from "path";
+import corsOptions from "../config/corsSetup.js";
+import { errorHandler } from "../middlewares/errorHandler.js";
+import { successResponse } from "../helper/responseHandler.js";
+import version1 from "../app/version1.js";
 
 // express app
-const app = express()
+const app = express();
 
 // middleware
-app.use(cors(corsOptions))
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-app.use(morgan("dev"))
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 
 // cookie parser
-app.use(cookieParser())
+app.use(cookieParser());
+
+// static folder
+app.use("/public", express.static(path.resolve("public")));
+
+// version 1 routes
+version1.forEach((router) => {
+  app.use(router.path, router.route);
+});
 
 /**
  * @description   : Home route
@@ -25,24 +39,23 @@ app.use(cookieParser())
  */
 
 app.get(
-  "/", 
+  "/",
   asyncHandler(async (_, res) => {
     successResponse(res, {
       statusCode: 200,
-      message: "Api is running successfully."
-    })
+      message: "Api is running successfully.",
+    });
   })
-)
+);
 
 // client error handling
 app.use(
   asyncHandler(async () => {
-    throw createError.NotFound("Could not find this route.")
+    throw createError.NotFound("Couldn't find this route.");
   })
-)
+);
 
-
-// server error handling 
-app.use(errorHandler)
+// server error handling
+app.use(errorHandler);
 
 export default app;
