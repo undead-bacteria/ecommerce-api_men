@@ -51,9 +51,9 @@ const filterQuery = (req, searchFields) => {
    *
    * @query_sort             :    ?sort=name,price
    *
-   * @receive_data_format    :    { sort : 'name,price' }
+   * @receive_data_format    :    { sort : 'name, price' }
    *
-   * @change_data_format     :    { sort : 'name price' }
+   * @change_data_format     :    { sort : 'name, price' }
    *
    */
 

@@ -1,4 +1,3 @@
-import express from "express";
 import createError from "http-errors";
 import { isValidObjectId } from "mongoose";
 import productModel from "../models/product.model.js";
