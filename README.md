@@ -12,12 +12,12 @@ Product Management:
 Vendors have the ability to add, update, and remove their products. Each product can include details such as name, description, price, and availability.
 
 PACKAGES:
-Express
-Express-validator
-Mongoose
-Multer
-Nodemailer
-Wintson Loger
-JWT
-Bcryptjs
+Express,
+Express-validator,
+Mongoose,
+Multer,
+Nodemailer,
+Wintson Logger,
+JWT,
+Bcryptjs,
 Cookie-parser
