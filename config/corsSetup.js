@@ -1,5 +1,5 @@
 import createError from "http-errors";
-import { clientWhiteList } from "../app/secret.js"
+import { clientWhiteList } from "../app/secret.js";
 
 // whitelist is an array of url's that are allowed to access the api
 var whitelist = clientWhiteList;
@@ -8,13 +8,13 @@ var whitelist = clientWhiteList;
 var corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true)
+      callback(null, true);
     } else {
-      callback(createError(401, "Not allowed by CORS"))
+      callback(createError(401, "Not allowed by CORS"));
     }
-  }, 
+  },
   optionsSuccessStatus: 200,
   credentials: true,
-}
+};
 
 export default corsOptions;
