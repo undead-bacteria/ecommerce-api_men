@@ -8,9 +8,9 @@ const runValidation = (req, res, next) => {
     return errorResponse(res, {
       statusCode: 422,
       message: errors.array()[0].msg,
-    })
+    });
   }
-  next()
-}
+  next();
+};
 
 export default runValidation;

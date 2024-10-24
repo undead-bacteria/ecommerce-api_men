@@ -11,6 +11,7 @@ import corsOptions from "../config/corsSetup.js";
 import { errorHandler } from "../middlewares/errorHandler.js";
 import { successResponse } from "../helper/responseHandler.js";
 import version1 from "../app/version1.js";
+import dataRouter from "../routes/data.route.js";
 
 // express app
 const app = express();
@@ -31,6 +32,9 @@ app.use("/public", express.static(path.resolve("public")));
 version1.forEach((router) => {
   app.use(router.path, router.route);
 });
+
+// sample data routes
+app.use("/api/v1/data", dataRouter);
 
 /**
  * @description   : Home route
